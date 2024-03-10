@@ -1,6 +1,6 @@
 # vxe-grid表格配置项生成工具
-## 1.  使用说明
-* 本工具是基于vxe-table生成的vxe-grid的相关配置项
+## 1. 使用说明
+* 本工具是配合vxe-table库生成的vxe-grid的相关配置项
 
 ### 1.1 配置项
 #### 1.1.1  列配置
@@ -44,6 +44,92 @@
     },
   ];
 ```
+
+##### 1.1.1.1 列配置项使用示例
+```json
+
+ "columnsConfig" : [
+  {
+      "title": "名字", // 实际表头
+      "field": "name",  // 取自数据字段
+      "visible": true, // 控制显隐
+      "minWidth": 150,
+      "align": "left", // name列 左对齐
+      "headerAlign": "center",
+      "sortable": false, // 拖拽控制
+      "fixed": false
+    },
+    {
+      "title": "Age",
+      "field": "age",
+      "visible": true,
+      "minWidth": 100,
+      "align": "right", // age列右对齐
+      "headerAlign": "center",
+      "sortable": true,
+      "type": "number"
+    },
+    {
+      "title": "Action",
+      "field": "action",
+      "visible": false, // 隐藏
+      "minWidth": 200,
+      "align": "center", // 操作列居中
+      "headerAlign": "center"
+    }
+ ]
+```
+```js
+// 假数据
+const mockData = [
+  {
+    "id": 1,
+    "name": "name_1",
+    "age": 23,
+    "action": "action_1"
+  },
+  {
+    "id": 2,
+    "name": "name_2",
+    "age": 45,
+    "action": "action_2"
+  },
+  {
+    "id": 3,
+    "name": "name_3",
+    "age": 67,
+    "action": "action_3"
+  },
+]
+```
+```html
+<!-- html -->
+<!-- 此处以vue-template作为示例 -->
+  <div class="vxe-view">
+    <h2>
+      vxe-view
+    </h2>
+    <div class="table-container">
+      <vxe-grid v-bind="tableConfig.gridOptions" :data="mockData" :columns="tableConfig.columnsConfig">
+      </vxe-grid>
+    </div>
+  </div>
+```
+
+* 实际效果
+* name列左对齐，且实际显示“名字”
+* Age列右对齐
+* Action列居中却隐藏
+
+| ID | 名字   | Age |
+|----|--------|-----|
+| 1  | name_1 | 23  |
+| 2  | name_2 | 45  |
+| 3  | name_3 | 67  |
+
+
+
+
 #### 1.1.2  表格本身的配置项
 ```js
 /**
@@ -142,7 +228,7 @@ npm install -g attiybom-generate-table-tool
 ```
 attiybom-generate <jsonName> <filePath>
 ```
-#### 1.2.2.1  示例
+#### 1.2.2.1  命令示例
 * 以下命令将会在当前目录的src/views/demo路径下生成table.json文件
 * 请注意路径需要用单引号包裹
 ```
